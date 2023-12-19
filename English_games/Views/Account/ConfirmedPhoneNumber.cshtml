@@ -1,0 +1,60 @@
+@model English_games.ViewModels.Account.ConfirmedPhoneNumberViewModel
+
+@{
+    ViewBag.Title = "Подтверждение номера";
+    Layout = "_Layout";
+}
+<div class="container">
+    <div class="form-group text-center m-2 mx-auto login-reset-password">
+        <h4 class="mb-3">Введите код из смс для подтверждения номера</h4>
+        
+        <form method="post" asp-action="ConfirmedPhoneNumber" asp-controller="Account">
+            <input asp-for="CodeForConfirmNumber" type="text" placeholder="Введите код из смс"/>
+            <button id="confirmButton" type="submit">Подтвердить</button>
+        </form>
+
+        <button id="sendSmsButton" type="button"
+                class="btn btn-primary mt-3 new-sms"
+                onclick="sendSmsClick()"
+                disabled>
+            Новый смс <span id="timer"></span>
+        </button>
+
+        <!-- Установка значения таймера на клиенте -->
+        <input type="hidden" id="smsTimer" name="smsTimer" value="120"/>
+    </div>
+</div>
+
+<script>
+    var smsTimer = parseInt(document.getElementById("smsTimer").value || 0);
+    startSmsTimer(smsTimer);
+
+   async function sendSmsClick() {
+                    await fetch('/Account/SendSms', {
+                        method: 'GET',
+                    });
+                    document.getElementById("smsTimer").value = "10";
+
+        document.getElementById("sendSmsButton").disabled = true;
+        document.getElementById("smsTimer").value = "120";
+         var smsTimer = parseInt(document.getElementById("smsTimer").value || 0);
+        startSmsTimer(smsTimer);
+    }
+    
+    function startSmsTimer(smsTimer) {
+        var seconds = smsTimer;
+        var timerElement = document.getElementById("timer");
+        var sendSmsButton = document.getElementById("sendSmsButton");
+        timerElement.style.display = 'inline';
+        var intervalId = setInterval(function () {
+            seconds--;
+            timerElement.innerHTML = seconds + ' сек';
+            if (seconds <= 0) {
+                sendSmsButton.disabled = false;
+                timerElement.innerHTML = '';
+                timerElement.style.display = 'none';
+                clearInterval(intervalId);
+            }
+        }, 1000);
+    }
+</script>

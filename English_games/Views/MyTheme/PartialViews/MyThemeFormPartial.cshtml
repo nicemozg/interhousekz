@@ -1,0 +1,70 @@
+@model English_games.ViewModels.MyThemViewModel
+
+<div class="row justify-content-center">
+    <div class="col-md-6 game">
+        <div class="form-group text-center m-2">
+            <label asp-for="Name">Название темы:</label>
+            <input type="text" asp-for="Name" class="game">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="ThemeNumber">Номер темы:</label>
+            <input type="text" asp-for="ThemeNumber" class="game">
+            <span asp-validation-for="ThemeNumber" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="LinkForVideo_16_Plus">Ссылка на YouTube 16+:</label>
+            <input type="text" asp-for="LinkForVideo_16_Plus" class="game">
+            <span asp-validation-for="LinkForVideo_16_Plus" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="LinkForVideo_16_Plus">Ссылка на YouTube 16-:</label>
+            <input type="text" asp-for="LinkForVideo_16_Minus" class="game">
+            <span asp-validation-for="LinkForVideo_16_Minus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group text-center m-2">
+            <label asp-for="Price_3_Months">Цена на 3 месяца:</label>
+            <input type="text" asp-for="Price_3_Months" class="game">
+            <span asp-validation-for="Price_3_Months" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="Price_6_Months">Цена на 6 месяцев:</label>
+            <input type="text" asp-for="Price_6_Months" class="game">
+            <span asp-validation-for="Price_6_Months" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="Price_Infinity">Цена бесконечно:</label>
+            <input type="text" asp-for="Price_Infinity" class="game">
+            <span asp-validation-for="Price_Infinity" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group text-center m-2">
+            <label asp-for="Price_3_Months">Куплено:</label>
+            <input type="text" asp-for="PurchaseCount" class="game">
+            <span asp-validation-for="PurchaseCount" class="text-danger"></span>
+        </div>
+
+        <div class="text-center">
+            <label asp-for="PreviewFile"></label><br/>
+            <input asp-for="PreviewFile" type="file" id="PreviewFile" class="game mb-3"/>
+            <span asp-validation-for="PreviewFile" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+
+{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+}

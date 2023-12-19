@@ -1,0 +1,14 @@
+version: '7.0'
+networks:
+ deplay-quide-dev:
+  driver: bridge
+services: 
+ app: 
+  container_name: English_games
+  build:
+   context: .
+   dockerfile: Dockerfile
+  ports:
+   - "80:80"
+  networks: 
+   - deplay-quide-dev

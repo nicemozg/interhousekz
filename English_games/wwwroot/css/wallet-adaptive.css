@@ -1,0 +1,153 @@
+
+@media (max-width: 576px) {
+    .wallet-balance{
+        width: 300px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: #0a53be;
+    }
+
+    .kaspi-pay-img-block{
+        background-color: darkgray;
+        border-radius: 5px;
+        width: 300px;
+    }
+
+    .kaspi-pay-img{
+        width: 230px;
+    }
+
+    .kaspi-instruction {
+        color: darkred;
+        animation: myAnim 3s ease 0s infinite forwards;
+        width: 300px;
+        background-color: lightgray;
+        border-radius: 5px;
+    }
+
+    @keyframes myAnim {
+        0%,
+        50%,
+        100% {
+            opacity: 1;
+        }
+
+        25%,
+        75% {
+            opacity: 15%;
+        }
+    }
+
+    .replenishment{
+        width: 300px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: blue;
+    }
+
+    .whats-app{
+        color: green;
+        animation: whatsapp 5s ease 0s infinite forwards;
+        width: 300px;
+    }
+
+    @keyframes whatsapp {
+        0%,
+        50%,
+        100% {
+            opacity: 1;
+        }
+
+        25%,
+        75% {
+            opacity: 25%;
+        }
+    }
+
+    .whats-app-img{
+        width: 300px;
+    }
+}
+
+
+
+@media (min-width: 619px) {
+    .wallet-balance{
+        width: 440px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: #0a53be;
+    }
+
+    .kaspi-pay-img-block{
+        background-color: darkgray;
+        border-radius: 5px;
+        width: 440px;
+    }
+    
+    .kaspi-pay-img{
+        width: 350px;
+    }
+
+    .kaspi-instruction {
+        color: darkred;
+        animation: myAnim 3s ease 0s infinite forwards;
+        width: 440px;
+        background-color: lightgray;
+        border-radius: 5px;
+    }
+
+    @keyframes myAnim {
+        0%,
+        50%,
+        100% {
+            opacity: 1;
+        }
+
+        25%,
+        75% {
+            opacity: 15%;
+        }
+    }
+
+    .replenishment{
+        width: 440px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: blue;
+    }
+
+    .whats-app{
+        color: green;
+        animation: whatsapp 5s ease 0s infinite forwards;
+        width: 440px;
+    }
+
+    @keyframes whatsapp {
+        0%,
+        50%,
+        100% {
+            opacity: 1;
+        }
+
+        25%,
+        75% {
+            opacity: 25%;
+        }
+    }
+
+    .whats-app-img{
+        width: 440px;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    
+}
+
+
+@media (min-width: 992px) {
+    
+}

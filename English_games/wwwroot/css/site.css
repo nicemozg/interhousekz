@@ -1,0 +1,249 @@
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  /*background-image: linear-gradient(to right bottom, #dfe9f3 0%, white 100%);*/
+  background-image: url('../images/Logo/ih.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.instagram-logo-header{
+  width: 40px;
+  margin-top: 5px;
+  margin-left: 10px;
+  animation: logo-anim 3s ease 0s infinite forwards;
+}
+
+.telegram-logo-header{
+  width: 40px;
+  margin-top: 5px;
+  margin-left: 10px;
+  /*animation: logo-anim 5s ease 0s infinite forwards;*/
+}
+
+@keyframes logo-anim {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 25%;
+  }
+}
+
+.header-inter-house{
+  font-family: 'Abril Fatface', serif;
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Tilt Warp', sans-serif;
+  background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+  max-width: 500px;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.international{
+  color: darkred;
+}
+
+.house{
+  color: #423f76;
+}
+
+.main-text-area{
+  height: 150px;
+}
+
+.login-reset-password{
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  padding: 25px;
+  max-width: 400px;
+  border-radius: 5px;
+}
+
+.register{
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  padding: 25px;
+  max-width: 550px;
+  border-radius: 5px;
+}
+
+.personal-data{
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.login-input{
+  width: 200px;
+}
+
+.login-password{
+  width: 161px;
+}
+
+.login-eye{
+  width: 39px;
+}
+
+.reset-password{
+  width: 250px;
+}
+
+.insufficient-funds{
+  width: 350px;
+  background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 10px 6px;
+  border-radius: 5px;
+}
+
+.them-list {
+  width: 400px;
+}
+
+.game {
+  width: 440px;
+}
+
+.game-book {
+  width: 560px;
+}
+
+.flag-number {
+  width: 50px;
+}
+
+.register-form{
+  width: 250px;
+}
+
+.adult-form{
+  width: 250px;
+  font-size: 12px;
+  background-color: whitesmoke;
+  opacity: 80%;
+  border-radius: 5px;
+}
+
+.new-sms{
+  width: 200px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.red-block {
+  color: darkred;
+}
+
+.green-unblock{
+  color: green;
+}
+
+.main-page{
+  width: 600px;
+}
+
+.main-header {
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+
+.main-content {
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-color: #badce3;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.purchase{
+  font-style: italic;
+}
+
+.game-label{
+  width: 120px;
+}
+
+.reminder-passed{
+  width: 350px;
+  background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 10px 6px;
+  border-radius: 5px;
+}
+
+.passed-theme, .reminder-theme {
+  animation: myAnim 5s ease 0s infinite normal forwards;
+  color: green;
+}
+
+@keyframes myAnim {
+  0% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+
+  10% {
+    animation-timing-function: ease-in;
+    transform: scale(0.91);
+  }
+
+  17% {
+    animation-timing-function: ease-out;
+    transform: scale(0.98);
+  }
+
+  33% {
+    animation-timing-function: ease-in;
+    transform: scale(0.87);
+  }
+
+  45% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

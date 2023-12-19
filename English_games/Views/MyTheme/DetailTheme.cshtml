@@ -1,0 +1,260 @@
+@using English_games.Enum
+@model English_games.ViewModels.MyThemViewModel
+
+@{
+    ViewBag.Title = $"Тема {Model.Name}";
+    Layout = "_Layout";
+}
+
+<div class="container mx-auto">
+    <div class="theme-name mx-auto">
+        <h2 class="my-3 text-center p-1"> 
+            @Model.Name
+        </h2>
+    </div>
+    @{
+        var isAdminOrSuperAdmin = User.IsInRole("admin") || User.IsInRole("superAdmin");
+        var isUser = User.IsInRole("user");
+        if (isAdminOrSuperAdmin)
+        {
+            <h6 class="mt-3">Дата добавления темы @Model.CreatedAtMyTheme.ToString("dd MMMM yyyy")</h6>
+        }
+    }
+    <div class="text-center">
+        @{
+            if (Model.AccessTo.HasValue && Model.AccessTo.Value >= DateTime.Now)
+            {
+                if (Model.Adult)
+                {
+                    <iframe
+                        class="video-detail"
+                        src="https://www.youtube.com/embed/@Model.LinkForVideo_16_Plus"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write;
+                            encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe>
+                }
+                else
+                {
+                    <iframe class="video-detail" 
+                            src="https://www.youtube.com/embed/@Model.LinkForVideo_16_Minus"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write;
+                 encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe>
+                }
+            }
+            else
+            {
+                <img class="video-detail"  src="~/images/previews/@Model.LinkForPreview" alt="@Model.Name"/>
+            }
+        }
+    </div>
+    @{
+        if (isAdminOrSuperAdmin)
+        {
+            if (TempData["Error"] != null)
+            {
+                <h3 class="text-danger text-center">@TempData["Error"]</h3>
+            }
+            <form method="post" class="" asp-action="AddGame">
+                <input type="hidden" name="ThemId" value="@Model.Id"/>
+                
+                <div class="form-group text-center m-2">
+                    <label name="Game" class="game-label">Платформа:</label>
+                    <select id="Platform" name="Game" class="game">
+                        <option value="Web">Web</option>
+                        <option value="IOS">IOS</option>
+                        <option value="Android">Android</option>
+                    </select>
+                </div>
+                
+                <div class="form-group text-center m-2">
+                    <label name="Name" class="game-label">Название игры:</label>
+                    <input type="text" name="Name" class="game">
+                </div>
+
+                
+                <div class="form-group text-center m-2">
+                    <label name="DescriptionForGame" class="game-label">Описание игры:</label>
+                    <textarea type="text" name="DescriptionForGame" class="game" maxlength="112"></textarea>
+                </div>
+                
+                <div class="form-group text-center m-2">
+                    <label name="LinkPathForGame" class="game-label">Ссылка на игру:</label>
+                    <input type="text" name="LinkPathForGame" class="game">
+                </div>
+                <div class="text-center m-2">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+
+            <form method="post" class="" asp-action="AddBook">
+                <input type="hidden" name="ThemeId" value="@Model.Id"/>
+                <div class="form-group text-center m-2">
+                    <label name="NameForBook" class="game-label">Название книги:</label>
+                    <input type="text" name="Name" class="game">
+                </div>
+
+                <div class="form-group text-center m-2">
+                    <label name="LinkPathForBook" class="game-label">Ссылка на книгу:</label>
+                    <input type="text" name="LinkPathForBook" class="game">
+                </div>
+                <div class="text-center m-2">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        }
+    }
+
+
+    @if (Model.LinkForGames.Count > 0)
+    {
+        <div class="form-group text-center m-2">
+            <table class="table table-bordered games-books-table mx-auto table-hover bg-light">
+                <thead>
+                <tr>
+                    <th class="game-names">Игры</th>
+                    <th>Описание</th>
+                    <th class="game-book-btn-block">Играть</th>
+                    @{
+                        if (isAdminOrSuperAdmin)
+                        {
+                            <th>Редактировать</th>
+                            <th>Удалить</th>
+                            <th>Дата добавления</th>
+                        }
+                    }
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var game in Model.LinkForGames)
+                {
+                    <tr>
+                        <td>
+                            <a>@game.Name</a>
+                        </td>
+                        <td>
+                            <a>@game.DescriptionForGame</a>
+                        </td>
+                        @{
+                            if (Model.AccessTo.HasValue && Model.AccessTo.Value >= DateTime.Now)
+                            {
+                                if (game.Game == Game.Web)
+                                {
+                                    <td>
+                                        <a href="@game.LinkPathForGame" class="btn btn-success btn-sm btn-play-open" target="_blank">Web</a>
+                                    </td>
+                                }
+                                else if (game.Game == Game.Ios)
+                                {
+                                    <td>
+                                        <a href="@game.LinkPathForGame" class="btn btn-success btn-sm btn-play-open" target="_blank">IOS</a>
+                                    </td>
+                                }
+                                else if (game.Game == Game.Android)
+                                {
+                                    <td>
+                                        <a href="@game.LinkPathForGame" class="btn btn-success btn-sm btn-play-open" target="_blank">Android</a>
+                                    </td>
+                                }
+                               
+                            }
+                            else
+                            {
+                                <td>
+                                    <p class="btn btn-light btn-sm btn-play-open" target="_blank">Play</p>
+                                </td>
+                            }
+                            if (isAdminOrSuperAdmin)
+                            {
+                                <td>
+                                    <a asp-action="EditGame" asp-route-gameId="@game.Id" class="btn btn-primary">Edit</a>
+                                </td>
+                                <td>
+                                    <a asp-action="DeleteGame" asp-route-gameId="@game.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                                <td>
+                                    <a>@game.CreatedAt.ToString("dd MMMM yyyy")</a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="form-group text-center m-2">
+            <p>Еще ни одна игра не была добавлена.</p>
+        </div>
+    }
+
+    @if (Model.LinkForBooks.Count > 0)
+    {
+        <div class="form-group text-center m-2">
+
+            <table class="table table-bordered games-books-table mx-auto table-hover bg-light">
+                <thead>
+                <tr>
+                    <th>Название Книг</th>
+                    <th class="game-book-btn-block">Открыть</th>
+                    @{
+                        if (isAdminOrSuperAdmin)
+                        {
+                            <th>Редактировать</th>
+                            <th>Удалить</th>
+                            <th>Дата добавления</th>
+                        }
+                    }
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var book in Model.LinkForBooks)
+                {
+                    <tr>
+                        <td>
+                            <a>@book.Name</a>
+                        </td>
+                        @{
+                            if (Model.AccessTo.HasValue && Model.AccessTo.Value >= DateTime.Now)
+                            {
+                                <td>
+                                    <a href="@book.LinkPathForBook" class="btn btn-success btn-sm btn-play-open" 
+                                       arget="_blank">Open</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <p class="btn btn-light btn-sm btn-play-open" target="_blank">Open</p>
+                                </td>
+                            }
+                            if (isAdminOrSuperAdmin)
+                            {
+                                <td>
+                                    <a asp-action="EditBook" asp-route-bookId="@book.Id" class="btn btn-primary">Edit</a>
+                                </td>
+                                <td>
+                                    <a asp-action="DeleteBook" asp-route-bookId="@book.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                                <td>
+                                    <a>@book.CreatedAt.ToString("dd MMMM yyyy")</a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="form-group text-center m-2">
+            <p>Еще ни одна книга не была добавлена.</p>
+        </div>
+    }
+</div>

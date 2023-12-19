@@ -1,0 +1,39 @@
+@using English_games.ViewModels
+@model English_games.ViewModels.MyThemViewModel
+
+@{
+    ViewBag.Title = "Добавить тему";
+    Layout = "_Layout";
+}
+
+@{
+    if (ViewBag.Error is not null)
+    {
+        <h3 class="text-danger">@ViewBag.Error</h3>
+    }
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h4 class="text-center mx-auto game">@ViewBag.Title</h4>
+        <form method="post" asp-action="AddTheme" enctype="multipart/form-data">
+            @await Html.PartialAsync("PartialViews/MyThemeFormPartial", new MyThemViewModel())
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts
+
+        {
+
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+            }
+
+        }
+

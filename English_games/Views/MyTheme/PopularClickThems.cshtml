@@ -1,0 +1,46 @@
+@model List<English_games.ViewModels.PopularThemsViewModel>
+
+@{
+    ViewBag.Title = "Темы по кликам";
+    Layout = "_Layout";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6 game">
+        <h4>@ViewBag.Title</h4>
+        <table class="table game mx-auto table-bordered table-hover bg-light">
+            <thead>
+            <tr>
+                <th>Название темы</th>
+                <th>Клики</th>
+                 <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var theme in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="DetailTheme" asp-route-themeId="@theme.Id">
+                            @theme.Name #@theme.ThemeNumber.ToString()
+                        </a>
+                    </td>
+                    <td>
+                        @theme.ClickCount.ToString()
+                    </td>
+                    <td>
+                        <a asp-action="EditTheme" asp-route-themId="@theme.Id"
+                           class="btn btn-primary">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="DeleteTheme" asp-route-themeId="@theme.Id"
+                           class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

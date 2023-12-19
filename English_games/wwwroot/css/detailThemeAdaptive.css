@@ -1,0 +1,83 @@
+
+/* Кастомные стили для маленьких экранов */
+
+@media (max-width: 576px) {
+    .video-detail{
+        width: 320px;
+        height: 180px;
+    }
+
+    .theme-name {
+        width: 320px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: #0a53be;
+    }
+    
+    .games-books-table{
+        width: 320px;
+    }
+    
+    .game-book-btn-block{
+        width: 80px;
+    }
+    
+    .btn-play-open{
+        width: 75px;
+    }
+}
+
+@media (min-width: 619px) {
+    .video-detail{
+        width: 480px;
+        height: 270px;
+    }
+
+    .theme-name {
+        width: 480px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: #0a53be;
+    }
+
+    .games-books-table{
+        width: 480px;
+    }
+
+    .game-book-btn-block{
+        width: 100px;
+    }
+
+    .btn-play-open{
+        width: 85px;
+    }
+}
+
+/* Кастомные стили для средних и больших экранов, если нужно */
+@media (min-width: 768px) {
+    .theme-name {
+        width: 560px;
+        background-color: lightgray;
+        border-radius: 5px;
+        color: #0a53be;
+    }
+
+    .video-detail{
+        width: 560px;
+        height: 315px;
+    }
+    
+    .games-books-table{
+        width: 560px;
+    }
+}
+
+/* Кастомные стили для больших экранов, если нужно */
+@media (min-width: 992px) {
+    .games-books-table{
+        width: 850px;
+    }
+    .game-names{
+        width: 200px;
+    }
+}

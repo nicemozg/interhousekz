@@ -1,0 +1,139 @@
+@model List<English_games.ViewModels.User.UserViewModel>
+
+@{
+    ViewBag.Title = "Список пользователей";
+    Layout = "_Layout";
+    var isSuperAdmin = User.IsInRole("superAdmin");
+}
+
+<div class="container">
+    <div class="text-center">
+        <h2>@ViewBag.Title</h2>
+    </div>
+
+    <div class="row mb-3 game mx-auto">
+        <div class="col-12">
+            <div class="input-group">
+                <input type="text" id="searchId" class="form-control" placeholder="Поиск по ID">
+                <button class="btn btn-primary" onclick="searchById()">Поиск</button>
+            </div>
+        </div>
+    </div>
+
+@{
+    if (TempData["NullThemes"] != null)
+    {
+        <h4 class="text-center text-danger">@TempData["NullThemes"]</h4>
+    }
+}
+    <table class="table game mx-auto table-bordered table-hover bg-light">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Баланс</th>
+            <th>Дата регистрации</th>
+            <th>Темы</th>
+            <th>Pay</th>
+            <th>ReturnPay</th>
+            <th>Block UnBlock</th>
+            @{
+                if (isSuperAdmin)
+                {
+                    <th>Admin User</th>
+                }
+            }
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.IntUserId</td>
+                <td>
+                    @{
+                        if (user.Block)
+                        {
+                            <a asp-action="UserPurchaseThems" asp-controller="MyTheme" asp-route-UserId="@user.Id">
+                                <text>
+                                    @user.UserName <span class="strong red-block">Block</span>
+                                </text>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="UserPurchaseThems" asp-controller="MyTheme" asp-route-UserId="@user.Id">
+                            <text>@user.UserName <span class="strong green-unblock">Unblock</span></text>
+                            </a>
+                        }
+                    }
+                </td>
+                <td>@user.Balance KZT</td>
+                <td>@user.Creation.ToString("dd MMMM yyyy")</td>
+                <td>@user.PurchaseThemes.ToString()</td>
+                <td>
+                    <a class="btn btn-success" asp-action="Pay" asp-route-userId="@user.Id">Pay</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="ReturnPay" asp-route-userId="@user.Id">ReturnPay</a>
+                </td>
+                @{
+                    var isAdminOrSuperAdmin = User.IsInRole("admin") || User.IsInRole("superAdmin");
+                    if (isAdminOrSuperAdmin)
+                    {
+                        if (user.Block)
+                        {
+                            <td>
+                                <a class="btn btn-success" asp-action="ToggleBlockUser" asp-route-userId="@user.Id">UnBlock</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a class="btn btn-danger" asp-action="ToggleBlockUser" asp-route-userId="@user.Id">Block</a>
+                            </td>
+                        }
+                    }
+                    if (isSuperAdmin)
+                    {
+                        if (user.Admin)
+                        {
+                            <td>
+                                <a class="btn btn-success" asp-action="ToggleUserRole" asp-route-userId="@user.Id">User</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a class="btn btn-primary" asp-action="ToggleUserRole" asp-route-userId="@user.Id">Admin</a>
+                            </td>
+                        }
+                    }
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function searchById() {
+        var searchText = document.getElementById("searchId").value;
+        var table = document.querySelector(".table");
+        var rows = table.querySelectorAll("tbody tr");
+
+        // Пройдитесь по строкам и скройте те, которые не соответствуют поиску
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var idCell = row.querySelector("td:first-child");
+            var userId = idCell.textContent;
+
+            if (userId.includes(searchText)) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+</script>

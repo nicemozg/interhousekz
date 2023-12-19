@@ -1,0 +1,100 @@
+@model English_games.ViewModels.Main.MainViewModel
+
+@{
+    ViewBag.Title = "InterHouse";
+    Layout = "_Layout";
+    var isAdminOrSuperAdmin = User.IsInRole("admin") || User.IsInRole("superAdmin");
+}
+
+@{
+    if (isAdminOrSuperAdmin)
+    {
+        <form method="post" asp-action="AddHeader">
+            <div class="form-group text-center m-2">
+                <label asp-for="Header" class="game-label">Заголовок</label>
+                <textarea asp-for="Header" class="game main-text-area"></textarea>
+                <span asp-validation-for="Header" class="text-danger"></span>
+            </div>
+            <div class="text-center m-2">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+
+        <form method="post" asp-action="AddContent">
+            <div class="form-group text-center m-2">
+                <label asp-for="HeaderForDescription" class="game-label">Заголовок для текста</label>
+                <textarea asp-for="HeaderForDescription" class="game main-text-area"></textarea>
+                <span asp-validation-for="HeaderForDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center m-2">
+                <label asp-for="DescriptionMainPage" class="game-label">Текст</label>
+                <textarea asp-for="DescriptionMainPage" class="game main-text-area"></textarea>
+                <span asp-validation-for="DescriptionMainPage" class="text-danger"></span>
+            </div>
+            <div class="text-center m-2">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+    }
+}
+
+
+<div class="container mt-5">
+    <a asp-action="AnonimusIndex" asp-controller="MyTheme">
+        <h2 class="text-center header-inter-house mx-auto">
+            <span class="international">INTERNATIONAL</span> <span class="house">HOUSE</span>
+        </h2>
+    </a>
+
+    @if (Model != null)
+    {
+        
+        <div class="row justify-content-center">
+            <div class="main-page">
+                @if (!string.IsNullOrEmpty(Model.Header))
+                {
+                    <div class="main-header my-3 p-3">
+                        <h6>
+                            @Model.Header
+                        </h6>
+                        @if (isAdminOrSuperAdmin)
+                        {
+                            <a asp-action="DeleteHeader" class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                }
+
+                @if (Model.MainContents != null && Model.MainContents.Count != 0)
+                {
+                    foreach (var mainContent in Model.MainContents)
+                    {
+                        <div class="mb-3 main-content p-1">
+                            <p class="ms-1">
+                                <strong>@mainContent.Header</strong>
+                                @mainContent.DescriptionMainPage
+                            </p>
+                            @if (isAdminOrSuperAdmin)
+                            {
+                                <a class="btn btn-primary" asp-action="EditContent" asp-route-contentId="@mainContent.Id">Edit</a>
+                                <a class="btn btn-danger" asp-action="DeleteConntetnt" asp-route-contetntId="@mainContent.Id">Delete</a>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Eще нет контента</p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Model is null</p>
+    }
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

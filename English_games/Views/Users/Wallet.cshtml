@@ -1,0 +1,62 @@
+@model English_games.ViewModels.User.UserViewModel
+
+@{
+    ViewBag.Title = "Пополнить баланс";
+    Layout = "_Layout";
+}
+<div class="container">
+    <div class="wallet-balance mx-auto">
+        <h4 class="my-3 text-center p-1">
+            Ваш баланс @Model.Balance.ToString() KZT
+        </h4>
+    </div>
+    
+    <div class="kaspi-pay-img-block mx-auto p-3">
+        <div class="text-center">
+            <img src="~/images/Purchase/Kaspi.jpg" class="kaspi-pay-img"/>
+        </div>
+    </div>
+    <div class="mx-auto kaspi-instruction">
+        <h4 class="my-3 text-center p-1">
+            Если забыли указать номер в каспи, отправьте чек 🧾
+        </h4>
+    </div>
+    
+    <div class="theme-name replenishment mx-auto">
+        <a href="https://pay.kaspi.kz/pay/jfqordxt" id="kaspiLink">
+            <h4 class="py-3 text-center p-1">
+                Пополнить баланс с KASPI
+            </h4>
+        </a>
+    </div>
+    
+    <div class="theme-name mx-auto whats-app">
+        <h5 class="py-3 text-center p-1">
+            Если номер не указали отправьте чек на WhatsApp +77089238200
+        </h5>
+    </div>
+    
+    <div class="mx-auto whats-app-img">
+        <div class="text-center">
+            <img src="~/images/Purchase/Luna WhatsApp QR.jpg" class="whats-app-img"/>
+        </div>
+    </div>
+    
+</div>
+
+@section Scripts
+{
+   <script>
+          document.getElementById("kaspiLink").addEventListener("click", function (event) {
+              event.preventDefault();
+              fetch('@Url.Action("SendSmsForPay", "Users")', {
+                  method: "GET",
+              }).then(() => {
+                  window.location.href = "https://pay.kaspi.kz/pay/jfqordxt";
+              })
+              .catch(error => {
+                         console.error("Произошла ошибка:", error);
+                     });
+          });
+      </script>
+}

@@ -1,0 +1,138 @@
+
+/* Кастомные стили для маленьких экранов */
+
+@media (max-width: 375px) {
+    .logo{
+        width: 80px;
+    }
+}
+
+@media (min-width: 375px) {
+    .logo-div{
+        width: 100%;
+    }
+    .logo{
+        width: 80px;
+       
+    }
+}
+
+@media (min-width: 425px) {
+    .logo-div{
+        width: 100%;
+    }
+    .logo{
+        width: 80px;
+
+    }
+}
+@media (max-width: 425px) {
+    .navbar-btn{
+        width: 100px;
+    }
+    .instagram-telegram-logo{
+        width: 50px;
+    }
+}
+
+@media (min-width: 576px) {
+    .btn-adaptive {
+        width: 78px;
+        font-size: 12px; /* ваш кастомный размер шрифта */
+        padding: 4px 8px; /* ваш кастомный отступ */
+    }
+    .logo-div{
+        width: 100%;
+    }
+    .logo{
+        width: 80px;
+    }
+}
+
+@media (min-width: 619px) {
+    .logo-div{
+        width: 80px;
+        margin-right: 50px;
+    }
+    .logo{
+        width: 80px;
+    }
+    
+    .btn-adaptive {
+        width: 78px;
+        font-size: 12px; /* ваш кастомный размер шрифта */
+        padding: 4px 8px; /* ваш кастомный отступ */
+    }
+}
+
+/* Кастомные стили для средних и больших экранов, если нужно */
+@media (min-width: 768px) {
+    .btn-adaptive {
+        width: 104px;
+        font-size: 16px; /* ваш кастомный размер шрифта */
+        padding: 4px 8px; /* ваш кастомный отступ */
+    }
+    .logo-div{
+        width: 80px;
+        margin-left: 25px;
+    }
+    .logo{
+        width: 80px;
+    }
+}
+
+/* Кастомные стили для больших экранов, если нужно */
+@media (min-width: 992px) {
+    .btn-adaptive {
+        width: 130px;
+        font-size: 20px; /* ваш кастомный размер шрифта */
+        padding: 4px 8px; /* ваш кастомный отступ */
+    }
+    .logo-div{
+        width: 100px;
+        margin-left: 100px;
+    }
+    .logo{
+        width: 100px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo-div{
+        width: 100px;
+        margin-left: 100px;
+    }
+    .logo{
+        width: 100px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .logo-div{
+        width: 100px;
+        margin-left: 100px;
+    }
+    .logo{
+        width: 100px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .logo-div{
+        width: 100px;
+        margin-left: 100px;
+    }
+    .logo{
+        width: 100px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .logo-div{
+        width: 100px;
+        margin-left: 100px;
+    }
+    .logo{
+        width: 100px;
+    }
+}

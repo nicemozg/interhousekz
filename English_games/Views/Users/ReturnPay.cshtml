@@ -1,0 +1,33 @@
+@model English_games.ViewModels.User.UserViewModel
+
+@{
+    ViewBag.Title = "Снятие с баланса";
+    Layout = "_Layout";
+}
+
+<h2>Снять с баланса</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" asp-action="ReturnPay">
+            <div class="form-group text-center m-2">
+                <input type="hidden" asp-for="Id" value="@Model.Id" class="game">
+            </div>
+            
+            <div class="form-group text-center m-2">
+                <label asp-for="ReplenishmentAmount">Введите сумму:</label>
+                <input type="text" asp-for="ReplenishmentAmount" class="game">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Снять</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

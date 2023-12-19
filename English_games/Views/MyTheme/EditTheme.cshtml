@@ -1,0 +1,34 @@
+@model English_games.ViewModels.MyThemViewModel
+
+@{
+    ViewBag.Title = "Редактировать тему";
+    Layout = "_Layout";
+}
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h4 class="text-center mx-auto game">@ViewBag.Title @Model.Name</h4>
+        <form method="post" asp-action="EditTheme" enctype="multipart/form-data">
+            <input asp-for="Id" type="hidden"/>
+            @await Html.PartialAsync("PartialViews/MyThemeFormPartial", Model)
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
+
+
+        @section Scripts
+
+        {
+
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+            }
+
+        }
+
+    </div>
+</div>

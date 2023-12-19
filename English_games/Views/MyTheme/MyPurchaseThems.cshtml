@@ -1,0 +1,35 @@
+@model List<MyTheme>
+
+@{
+    ViewBag.Title = "Мои темы";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h2>Мои темы</h2>
+        <table class="table myThems-table mx-auto table-bordered  table-hover bg-light">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Название темы</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>
+                            <a asp-action="DetailTheme" asp-route-themeId="@Model[i].Id">
+                                @Model[i].Name
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

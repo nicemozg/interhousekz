@@ -1,0 +1,245 @@
+@model English_games.ViewModels.Account.RegisterViewModel
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "_Layout";
+}
+<div class="container mx-auto">
+    <div class="form-group text-center m-2 mx-auto register">
+        @{
+            if (ViewBag.Error is not null)
+            {
+                <h3 class="text-danger">@ViewBag.Error</h3>
+            }
+            else
+            {
+                <h2>Регистрация нового пользователя</h2>
+            }
+        }
+
+
+        <form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="col-md-6 register-form mx-auto">
+                <label for="registration_number">Номер телефона <span class="required text-danger">*</span></label>
+                <div class="input-group" tooltip="Ваш номер телефона в международном формате (только цифры), на него Вы получите код подтверждения регистрации." data-hasqtip="2" aria-describedby="qtip-2">
+
+                    <div class="input-group-prepend dropdown">
+                        <button data-selected-phone-prefix="77" data-toggle="dropdown"
+                                class="btn dropdown-toggle country-dropdown-button input-group-text px-0 me-1"
+                                type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                            <img src="/images/flags/kz.gif" class="flag-number">+7
+                        </button>
+                        <div class="dropdown-menu country-dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height: 250px;">
+                            <span class="dropdown-menu-arrow"></span>
+                            <div class="dropdown-item" data-country-prefix="77"><img src="/images/flags/kz.gif">Казахстан +77</div>
+                            <div class="dropdown-item" data-country-prefix="996"><img src="/images/flags/kg.gif">Кыргызстан +996</div>
+                            <div class="dropdown-item" data-country-prefix="992"><img src="/images/flags/tj.gif">Таджикистан +992</div>
+                            <div class="dropdown-item" data-country-prefix="998"><img src="/images/flags/uz.gif">Узбекистан +998</div>
+                            <div class="dropdown-item" data-country-prefix="">Другая страна +</div>
+                        </div>
+                    </div>
+                    <input asp-for="PhoneNumber"
+                           type="text"
+                           id="UserName"
+                           class="phone-field form-control ps-4"
+                           data-number-prefix="77"
+                           placeholder="(777)-123-4567" pattern="\(\d{3}\)-\d{3}-\d{4}" maxlength="14">
+                </div>
+            </div>
+
+            <div class="register-form mx-auto">
+                <label asp-for="Name">Имя <span class="required text-danger">*</span></label><br/>
+                <input asp-for="Name"
+                       id="Name"
+                       class="register-form"
+                       placeholder="Введите ваше имя"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <div class="register-form my-2 mx-auto">
+                <label asp-for="Password">Пароль 
+                    <span class="required text-danger">*</span></label><br/>
+                <div class="input-group">
+                    <input asp-for="Password"
+                           id="Password"
+                           class="register-form form-control"
+                           placeholder="Минимум 6 символов"
+                           type="password"
+                    />
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="register-form mx-auto">
+                <label asp-for="PasswordConfirm">Подтверждение пароля 
+                    <span class="required text-danger">*</span></label><br/>
+                <div class="input-group">
+                    <input asp-for="PasswordConfirm"
+                           id="ConfirmPassword"
+                           class="register-form form-control"
+                           placeholder="Повторите пароль"
+                           type="password"
+                    />
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+            </div>
+            
+            <div class="form-check mx-auto adult-form mt-3 p-2">
+                <label class="form-check-label register-form" for="adultCheckbox">
+                    Если вам 16+ поставьте галочку
+                </label>
+            </div>
+            <input asp-for="Adult" class="form-check-input " id="adultCheckbox"/>
+            
+            
+            <div class="form-check mx-auto agreement-form mt-3 p-2">
+                <label class="form-check-label" for="agreeCheckbox">
+                    Нажимая кнопку «Регистрация», я даю свое согласие на обработку моих персональных данных, в
+                    соответствии с Законом Республики Казахстан от 21 мая 2013года № 94-V «О персональных данных
+                    и их защите», на условиях и для целей, определенных в 
+                    <a asp-action="PersonalData">
+                        Согласии на обработку персональных
+                                            данных
+                    </a> <span class="red-block">*</span>
+                </label>
+            </div>
+            <input type="checkbox" class="form-check-input" id="agreeCheckbox" required>
+            
+            <div>
+                <input class="btn btn-success mt-3"
+                       id="SubmitButton"
+                       type="submit"
+                       value="Регистрация"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var phoneField = document.getElementById('UserName');
+            var togglePassword1 = document.getElementById('togglePassword1');
+            var passwordInput1 = document.getElementById('Password');
+            var togglePassword2 = document.getElementById('togglePassword2');
+            var confirmPasswordInput = document.getElementById('ConfirmPassword');
+            var userNameInput = document.getElementById("UserName");
+            var nameInput = document.getElementById("Name");
+            var passwordInput = document.getElementById("Password");
+            var confirmPasswordInput = document.getElementById("ConfirmPassword");
+            var submitButton = document.getElementById("SubmitButton");
+            var agreeCheckbox = document.getElementById("agreeCheckbox");
+    
+            phoneField.addEventListener('input', function (event) {
+                handlePhoneNumberInput(event);
+            });
+    
+            phoneField.addEventListener('keypress', function (event) {
+                // Проверка на ввод только цифр
+                var isDigit = /^\d$/.test(event.key);
+                if (!isDigit) {
+                    event.preventDefault();
+                }
+            });
+    
+            togglePassword1.addEventListener('click', function () {
+                // Переключаем типы пароля при клике на кнопку
+                var type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput1.setAttribute('type', type);
+            });
+    
+            togglePassword2.addEventListener('click', function () {
+                // Переключаем типы пароля при клике на кнопку
+                var type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+            });
+    
+            function handlePhoneNumberInput(event) {
+                var phoneField = event.target;
+                var inputValue = phoneField.value.replace(/\D/g, ''); // Оставляем только цифры
+            
+                if (event.inputType === 'deleteContentBackward') {
+                    // Если нажата клавиша Backspace, удаляем символ перед форматированием
+                    inputValue = inputValue.slice(0, -1);
+                }
+            
+                // Проверка на первый символ
+                if (/^[8+]/.test(phoneField.value)) {
+                    alert("Введите без 8 или +7 в формате (777)-123-4567");
+                    phoneField.value = phoneField.value.substring(1);
+                    inputValue = phoneField.value.replace(/\D/g, ''); // Обновляем значение после удаления "8"
+                }
+            
+                if (inputValue.length > 0) {
+                    var formattedValue = formatPhoneNumber(inputValue);
+                    phoneField.value = formattedValue;
+                } else {
+                    // Если введенное значение пусто, очищаем поле
+                    phoneField.value = '';
+                }
+            
+                validateForm(); // Добавлен вызов функции validateForm после форматирования номера
+            }
+    
+            function formatPhoneNumber(digits) {
+                var formattedValue = '(' + digits.substring(0, 3) + ')' +
+                    (digits.length > 3 ? '-' + digits.substring(3, 6) : '') +
+                    (digits.length > 6 ? '-' + digits.substring(6) : '');
+    
+                return formattedValue;
+            }
+    
+            // Функция для проверки валидности формы
+            function validateForm() {
+                // Проверяем, содержит ли поле ввода кода 10 цифр
+                var userNameIsValid = userNameInput.value.length == 14;
+                var nameIsValid = nameInput.value.length >= 2;
+                // Проверяем длину пароля
+                var passwordIsValid = passwordInput.value.length >= 6;
+    
+                // Проверяем совпадение паролей
+                var passwordsMatch = passwordInput.value === confirmPasswordInput.value;
+    
+                // Проверяем, установлена ли галочка в чекбоксе
+                var agreeCheckboxIsChecked = agreeCheckbox.checked;
+    
+                // Активируем или деактивируем кнопку в зависимости от результатов проверок
+                if (userNameIsValid && nameIsValid && passwordIsValid && passwordsMatch && agreeCheckboxIsChecked) {
+                    submitButton.removeAttribute("disabled");
+                } else {
+                    submitButton.setAttribute("disabled", "disabled");
+                }
+            }
+    
+            // Добавляем слушателя события "input" для поля ввода кода
+            userNameInput.addEventListener("input", validateForm);
+            nameInput.addEventListener("input", validateForm);
+    
+            // Добавляем слушателя события "input" для поля ввода пароля
+            passwordInput.addEventListener("input", validateForm);
+    
+            // Добавляем слушателя события "input" для поля ввода подтверждения пароля
+            confirmPasswordInput.addEventListener("input", validateForm);
+    
+            // Добавляем слушателя события "change" для чекбокса
+            agreeCheckbox.addEventListener("change", validateForm);
+    
+            // Вызываем функцию валидации при загрузке страницы
+            validateForm();
+        });
+    </script>
+
+
+}

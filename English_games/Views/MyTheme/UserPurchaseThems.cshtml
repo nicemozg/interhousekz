@@ -1,0 +1,45 @@
+@model List<English_games.ViewModels.PurchaseThemeViewModel>
+
+@{
+    ViewBag.Title = "Темы пользователя";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="text-center">
+        @{
+            for (int i = 0; i < 1; i++)
+            {
+                <h3>Темы пользователя @Model[0].UserPhoneNumber</h3>
+            }
+        }
+       
+        <table class="table myThems-table  mx-auto table-bordered table-hover bg-light">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Название темы</th>
+                <th>Дата активности</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>
+                            <a asp-action="DetailTheme" asp-route-themeId="@Model[i].ThemId">
+                                @Model[i].ThemeName #@Model[i].ThemeNumber.ToString()
+                            </a>
+                        </td>
+                        <td>
+                            @Model[i].AccessToDateTime?.ToString("dd MMMM yyyy")
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+
+/* Кастомные стили для маленьких экранов */
+
+@media (max-width: 576px) {
+    .agreement-form{
+        width: 300px;
+        font-size: 8px;
+        background-color: whitesmoke;
+        opacity: 70%;
+        border-radius: 5px;
+    }
+
+}
+
+@media (min-width: 619px) {
+    
+    .agreement-form{
+        width: 400px;
+        font-size: 8px;
+        background-color: whitesmoke;
+        opacity: 70%;
+        border-radius: 5px;
+    }
+
+}
+
+/* Кастомные стили для средних и больших экранов, если нужно */
+@media (min-width: 768px) {
+    
+    .agreement-form{
+        width: 500px;
+        font-size: 8px;
+        background-color: whitesmoke;
+        opacity: 70%;
+        border-radius: 5px;
+    }
+
+}
+
+/* Кастомные стили для больших экранов, если нужно */
+@media (min-width: 992px) {
+   
+}
