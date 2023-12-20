@@ -8,7 +8,16 @@ services:
   build:
    context: .
    dockerfile: Dockerfile
-  ports:
-   - "80:80"
   networks: 
    - deplay-quide-dev
+ nginx:
+  image: nginx:1.23.1-alpine
+  container_name: nginx
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./nginx/conf:/etc/nginx/conf.d
+   - ./../data/nginx/log:/var/log/nginx
+   - ./nginx/ssl/localhost:/etc/ssl:ro
+  restart: always

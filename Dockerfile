@@ -12,6 +12,7 @@ WORKDIR "/src/English_games"
 RUN dotnet build "English_games.csproj" -c Release -o /app/build
 
 FROM build AS publish
+COPY ["English_games/interHouse.sqlite", "/app/publish/interHouse.sqlite"]
 RUN dotnet publish "English_games.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
