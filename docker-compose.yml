@@ -18,4 +18,4 @@ services:
    - ./nginx/conf:/etc/nginx/conf.d
    - ./nginx/http:/etc/http:ro
 #   - ./../data/nginx/log:/var/log/nginx
-#   - ./nginx/ssl/localhost:/etc/ssl:ro
+   - ./nginx/ssl/interhouse.kz:/etc/ssl:ro
