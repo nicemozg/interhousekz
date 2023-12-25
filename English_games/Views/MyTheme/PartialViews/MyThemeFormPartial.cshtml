@@ -55,6 +55,12 @@
             <input asp-for="PreviewFile" type="file" id="PreviewFile" class="game mb-3"/>
             <span asp-validation-for="PreviewFile" class="text-danger"></span>
         </div>
+        @{
+            if (TempData["Error"] != null)
+            {
+                <h3 class="text-danger">@TempData["Error"]</h3>
+            }
+        }
     </div>
 </div>
 

@@ -7,6 +7,11 @@
         height: 180px;
     }
 
+    .photo-detail{
+        width: 320px;
+        height: 320px;
+    }
+
     .theme-name {
         width: 320px;
         background-color: lightgray;
@@ -31,6 +36,11 @@
     .video-detail{
         width: 480px;
         height: 270px;
+    }
+
+    .photo-detail{
+        width: 480px;
+        height: 480px;
     }
 
     .theme-name {
@@ -65,6 +75,11 @@
     .video-detail{
         width: 560px;
         height: 315px;
+    }
+    
+    .photo-detail{
+        width: 560px;
+        height: 560px;
     }
     
     .games-books-table{

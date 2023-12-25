@@ -17,8 +17,7 @@ public class MyThemViewModel
     [Required(ErrorMessage = "Поле обязательно для заполнения")]
     public string LinkForVideo_16_Minus { get; set; }
     [Display(Name = "Фото для Preview")]
-    [Required(ErrorMessage = "Поле обязательно для заполнения")]
-    public IFormFile PreviewFile { get; set; }
+    public IFormFile? PreviewFile { get; set; }
     public DateTime? AccessTo { get; set; }
     public DateTime CreatedAtMyTheme { get; set; }
     public string? LinkForPreview { get; set; }

@@ -268,10 +268,12 @@ public class MyThemeController : Controller
             }
 
             string extension = Path.GetExtension(model.PreviewFile.FileName);
-            if (extension != ".jpg" && extension != ".jpeg" && extension != ".png")
+            if (extension != ".jpg" && extension != ".jpeg" && extension != ".png" 
+                && extension != ".JPG" && extension != ".JPEG" && extension != ".PNG"
+                && extension != ".WEBP" && extension != ".webp")
             {
-                ViewBag.Error = "Расширение файла должно быть .jpg, .jpeg или .png";
-                return View();
+                TempData["Error"] = "Расширение файла должно быть .jpg, .jpeg, .webp или .png";
+                return RedirectToAction("EditTheme", "MyTheme", new { themId = model.Id });
             }
 
             string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images/previews");
