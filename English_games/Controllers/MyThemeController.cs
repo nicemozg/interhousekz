@@ -175,7 +175,9 @@ public class MyThemeController : Controller
                 && extension != ".JPEG"
                 && extension != ".png"
                 && extension != ".Png"
-                && extension != ".PNG")
+                && extension != ".PNG"
+                && extension != ".webp"
+                && extension != ".WEBP")
             {
                 ViewBag.Error = "Расширение файла должно быть .jpg, JPG, .jpeg, JPEG .png, PNG";
                 return View();
