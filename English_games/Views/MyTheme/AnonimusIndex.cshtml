@@ -15,7 +15,7 @@
                 </a>
                 <div class="card-body text-center">
                     <a asp-action="AnonimusDetailTheme" asp-route-themeId="@theme.Id">
-                        <h5 class="card-title">@theme.Name</h5>
+                        <h5 class="card-title">@theme.Name #@theme.ThemeNumber.ToString()</h5>
                     </a>
                     <p class="mb-0 purchase">Куплено @theme.PurchaseCount.ToString() раз</p>
                     <a asp-action="Register" asp-controller="Account" class="btn btn-primary mt-2">

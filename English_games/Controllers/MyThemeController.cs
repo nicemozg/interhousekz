@@ -35,7 +35,7 @@ public class MyThemeController : Controller
             return RedirectToAction("Index");
         }
     
-        var themes = _db.MyThemes.OrderByDescending(t => t.ClickCount).ToList();
+        var themes = _db.MyThemes.OrderBy(t => t.ThemeNumber).ToList();
         var pagedThemes = themes.Skip((page - 1) * pageSize).Take(pageSize).ToList();
     
         // Преобразование MyTheme в MyThemViewModel
